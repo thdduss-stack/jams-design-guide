@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 프로젝트 개요
+
+**디자이너가 Claude로 콘텐츠를 만들어 공유하는 프로젝트**입니다.
+Figma 디자인을 Claude를 통해 바로 코드로 변환하며, 디자인-코드 간 일관성을 자동화합니다.
+
+---
+
 ## Figma Dev Mode MCP 규칙
 
 - **중요**: Figma MCP Server가 localhost 소스를 반환하면 해당 소스를 직접 사용하세요
@@ -10,13 +17,85 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **중요**: localhost 소스가 있으면 플레이스홀더를 만들지 마세요
 - Figma 디자인의 색상값, 간격, 폰트 크기를 정확히 추출해서 사용하세요
 
-package.json 파일의 의존성을 확인하세요.
+## Tech Stack
 
-- **프레임워크**: Next.js 15+, TypeScript, React.js 18+
-- **스타일링**: tailwindcss@3 (안정 버전)
-- **상태관리**: React hooks (useState, useEffect 등)
+- **프레임워크**: Next.js 15+ (App Router), TypeScript 5.8, React 19+
+- **스타일링**: Tailwind CSS 3 (Vanilla Extract에서 전환 중)
+- **상태관리**: Zustand 5, React hooks
+- **데이터**: Tanstack Query 5, React Hook Form 7 + Zod
+- **UI**: JDS (JobKorea Design System) + BZW 커스텀 컴포넌트
+- **테스트**: Vitest + Playwright + Testing Library
 
-# 금지 패턴
+---
+
+## Claude Skills & Agents
+
+### 스킬 (`.claude/skills/`)
+
+디자인-코드 변환 워크플로우를 위한 전문 스킬들:
+
+| 스킬 | 설명 | 트리거 |
+|------|------|--------|
+| [figma-to-component](.claude/skills/figma-to-component/SKILL.md) | Figma 디자인 → React 컴포넌트 자동 생성 (Tailwind 전용) | Figma URL 제공 시 |
+| [figma-to-markdown](.claude/skills/figma-to-markdown/SKILL.md) | Figma 기획서 → UI 로직 마크다운 문서 변환 | `/figma-to-markdown` |
+| [figma-design-tokens-to-tailwind](.claude/skills/figma-design-tokens-to-tailwind/SKILL.md) | Figma 디자인 토큰 → Tailwind Config 자동 변환 | 디자인 토큰 변환 요청 시 |
+| [design-review](.claude/skills/design-review/SKILL.md) | Figma 디자인 vs 구현 시각적/토큰 검수 | `/design-review` |
+| [icon-mapper](.claude/skills/icon-mapper/SKILL.md) | Figma 아이콘 → 프로젝트 아이콘 매핑 | figma-to-component에서 자동 호출 |
+
+### 에이전트 (`.claude/agents/`)
+
+| 에이전트 | 설명 |
+|----------|------|
+| [icon-mapper](.claude/agents/icon-mapper.md) | Figma 아이콘을 BZWIcon / @jds/theme Icon으로 매핑 |
+| [jams-tailwind-config](.claude/agents/jams-tailwind-config.md) | design-tokens.css → tailwind.config.mjs 자동 생성 |
+
+### 커맨드 (`.claude/commands/`)
+
+| 커맨드 | 설명 |
+|--------|------|
+| `/ha` | Gemini-style Reasoning + Haiku 구현 |
+| `/haq` | Haiku Assisted Question (2-3개 질문 후 /ha) |
+| `/haqq` | Haiku Assisted Question (4-6개 질문 후 /ha) |
+| `/haqqq` | Haiku Assisted Question (7-10개 질문 후 /ha) |
+
+---
+
+## 디자인 가이드
+
+디자인 원칙과 규격은 [docs/policy/design-guide.md](docs/policy/design-guide.md)를 참조하세요.
+
+핵심 요약:
+- **테마**: 잡코리아(파랑 Primary) / 알바몬(주황 Primary) 듀얼 브랜드
+- **데스크톱 전용**: 최소 1216px ~ 최대 1856px
+- **폰트**: Pretendard
+- **색상**: 역할 기반 색상 사용 (HEX 직접 사용 지양)
+
+---
+
+## Tailwind 설정 (`tailwind.config.mjs`)
+
+### 커스텀 설정 주의사항 (기본 Tailwind와 다름)
+
+1. **spacing**: px 기반 스케일 → `gap-4`는 **4px** (Tailwind 기본 16px 아님)
+   - 사용 가능: `0`, `2`, `4`, `6`, `8`, `10`, `12`, `13`, `14`, `16`, `20`, `24`, `28`, `32`, `40`, `48`, `52`, `56`, `60`, `72`, `80`, `-1`, `-2`, `-12`
+
+2. **borderRadius**: 커스텀 스케일 → `rounded-full` 대신 **`rounded-999`** 사용
+   - 사용 가능: `rounded-0`, `rounded-2`, `rounded-4`, `rounded-6`, `rounded-8`, `rounded-12`, `rounded-16`, `rounded-20`, `rounded-24`, `rounded-999`
+
+3. **fontSize**: 숫자 스케일 → `text-14`는 14px (lineHeight, letterSpacing 자동 연동)
+   - 사용 가능: `text-11` ~ `text-36` (11, 12, 13, 14, 15, 16, 18, 20, 24, 28, 32, 36)
+
+4. **fontWeight**: 커스텀 이름
+   - `font-regular`(400), `font-medium`(500), `font-semibold`(600), `font-bold`(700)
+
+5. **colors**: JDS CSS 변수 기반 팔레트
+   - 기본: `base-black`, `base-white`, `base-dimed`
+   - 팔레트: `gray`, `blue`, `orange`, `red`, `green`, `yellow`, `bluegray`, `violet`, `purple`, `pink`, `indigo`, `brown`, `olive`, `mint`
+   - 시멘틱: `button`, `line`, `typography`, `icon`, `box`, `checkbox`, `radio`, `tabs`, `tag` 등
+
+---
+
+## 금지 패턴
 
 - `any` 타입 사용 금지 → 명확한 interface 정의
 - inline style 금지 → 우선적으로 컴포넌트 props사용 후 안될경우 Tailwind 클래스 사용
@@ -30,339 +109,94 @@ package.json 파일의 의존성을 확인하세요.
   - ❌ `import { Company } from '@core/domain/company'`
   - ✅ `import { Company } from '@core/domain/company/entities'`
 
+---
+
 ## Commands
 
 ### Development
 
 ```bash
-# Start development server
-pnpm dev
-
-# Build for production
-pnpm build
-
-# Build with bundle analysis
-pnpm build-analyze
-
-# Start production build locally
-pnpm build-dev
-```
-
-### Testing
-
-```bash
-# Run unit tests with Vitest
-pnpm test
-
-# Run unit tests with coverage
-pnpm test:coverage
-
-# Run filtered unit tests with coverage
-pnpm test:coverage:filter
-
-# Run unit tests with UI
-pnpm test:unit:ui
-
-# Run unit tests in watch mode
-pnpm test:unit:watch
-
-# Run E2E tests with Playwright
-pnpm test:e2e
-
-# Run E2E tests with UI
-pnpm test:e2e:ui
-
-# Run performance tests with K6
-pnpm test:k6
+pnpm dev              # 개발 서버 실행
+pnpm build            # 프로덕션 빌드
+pnpm build-analyze    # 번들 분석 빌드
 ```
 
 ### Code Quality
 
 ```bash
-# Run ESLint with auto-fix
-pnpm lint
-
-# Format code with Prettier
-pnpm prettier
-
-# Run TypeScript type checking
-pnpm typecheck
-
-# Run SonarQube analysis
-pnpm sonar
+pnpm lint             # ESLint
+pnpm prettier         # Prettier 포맷팅
+pnpm typecheck        # TypeScript 타입 체크
+pnpm lint && pnpm prettier && pnpm typecheck  # 전체 체크
 ```
 
-### Development Tools
+### Testing
 
 ```bash
-# Generate CSS for SVG icons
-pnpm bz:create-svg-css
-
-# Fetch API schemas
-pnpm fetch-schema
-
-# Generate Zod schemas
-pnpm generate-zod
-
-# SSL certificate setup
-pnpm cert
-
-# Clean install dependencies
-pnpm clear-install
+pnpm test             # 유닛 테스트 (Vitest)
+pnpm test:e2e         # E2E 테스트 (Playwright)
 ```
+
+---
 
 ## Project Structure
 
-This project follows **FSD + DDP 혼합 아키텍처**:
-
-### FSD (Feature-Sliced Design) 레이어
+**FSD + DDP 혼합 아키텍처**:
 
 ```
 src/
-├── app/                    # Next.js App Router pages and layouts
-├── views/                  # Page-level business logic (FSD Pages layer)
-├── widgets/                # Composite UI blocks combining multiple features
-├── features/               # Business functionality modules
-├── entities/               # Business entities and core models
-└── shared/                 # Common resources used across all layers
-    ├── config/            # Global configuration
-    ├── fetch/             # API client setup
-    ├── styles/            # Global styles
-    ├── types/             # Common type definitions
-    ├── ui/                # Common UI components
-    └── utils/             # Utility functions
+├── app/                    # Next.js App Router (pages, layouts)
+├── views/                  # 페이지 레벨 비즈니스 로직
+├── widgets/                # 복합 UI 블록 (여러 features 조합)
+├── features/               # 비즈니스 기능 모듈
+├── entities/               # 비즈니스 엔티티, 코어 모델
+├── core/                   # Data Layer (core-data/)
+└── shared/                 # 공통 리소스 (config, fetch, styles, ui, utils)
 ```
 
-### DDP (Data-Domain-Presentation) 레이어
-
-FSD의 모든 레이어(`features`, `views`, `widgets`, `entities`)에서 DDP 패턴 적용 가능:
+### DDP 패턴 (각 레이어 내부)
 
 ```
-src/
-├── core/
-│   └── core-data/[feature-name]/   # Data Layer (분리됨)
-│       ├── dto.ts                  # API 응답/요청 DTO 타입
-│       ├── mapper.ts               # DTO ↔ Entity 변환
-│       ├── api.ts                  # API 호출 함수
-│       └── repository.impl.ts      # Repository 인터페이스 구현
-│
-└── {layer}/[feature-name]/         # layer = features, views, widgets, entities 등
-    ├── domain/                     # Domain Layer - 비즈니스 로직
-    │   ├── entities.ts             # 도메인 엔티티 (불변 객체)
-    │   ├── repository.ts           # Repository 인터페이스 (추상화)
-    │   └── services.ts             # 비즈니스 로직 서비스
-    ├── model/                      # Presentation Hooks
-    │   └── hooks/                  # React Query hooks
-    └── ui/                         # UI 컴포넌트
+{layer}/[feature]/
+├── domain/                 # 순수 비즈니스 로직 (entities, repository, services)
+├── model/hooks/            # React Query hooks
+└── ui/                     # UI 컴포넌트
+
+core/core-data/[feature]/   # Data Layer (dto, mapper, api, repository.impl)
 ```
-
-## Architecture
-
-### Tech Stack
-
-- **Framework**: Next.js 15.4.3 with App Router
-- **Runtime**: React 19.1.0
-- **Language**: TypeScript 5.8.3
-- **Styling**: Tailwind CSS (Vanilla Extract에서 전환 중)
-- **UI Components**: JDS (JobKorea Design System) + Custom BZW components
-- **Data Fetching**: Tanstack Query 5.80.7
-- **Forms**: React Hook Form 7.57.0 + Zod validation
-- **State Management**: Zustand 5.0.5
-- **Testing**: Vitest + Playwright + Testing Library
-- **Build**: Standalone output with Bundle Analyzer support
 
 ### FSD Layer Rules
 
-1. **Dependency Direction**: Lower layers cannot import from higher layers
-   - `shared` → no other layer imports allowed
-   - `entities` → can import from `shared` only
-   - `features` → can import from `entities` and `shared`
-   - `widgets` → can import from `features`, `entities`, and `shared`
+- `shared` → 외부 의존 없음
+- `entities` → `shared`만 import
+- `features` → `entities` + `shared`
+- `widgets` → `features` + `entities` + `shared`
+- **같은 레이어 간 직접 import 금지** → `widgets`로 조합
 
-2. **Same Layer Imports**: Features cannot directly import from other features
-   - Use `widgets` layer to compose multiple features
+### Styling 규칙
 
-### DDP Layer Rules
+- **신규 코드**: Tailwind CSS 필수
+- **기존 Vanilla Extract**: 수정 시 점진적 Tailwind 전환
 
-1. **의존성 방향**: Domain → Data (역방향 금지)
-   - `domain/` → 외부 의존성 없음 (순수 비즈니스 로직)
-   - `core-data/` → `domain/`의 인터페이스 구현
-   - `model/hooks/` → `domain/`의 서비스와 엔티티 + `core-data/`의 repository 사용
+---
 
-2. **Repository 패턴**:
-   - `{layer}/[feature]/domain/repository.ts` → 추상 인터페이스 정의
-   - `core/core-data/[feature]/repository.impl.ts` → 실제 API 호출 구현
-   - 테스트 시 Mock Repository로 교체 가능
-
-3. **Mapper 규칙**:
-   - API 응답(DTO) ↔ 도메인 엔티티 변환은 `core-data/[feature]/mapper.ts`에서만
-   - UI 레이어는 도메인 엔티티만 사용
-
-4. **Import 규칙** (배럴 파일 사용 금지):
-   - 각 파일에서 직접 export하고, import 시 직접 파일 경로 사용
-   - 엔티티: `@{layer}/[feature]/domain/entities`
-   - 인터페이스: `@{layer}/[feature]/domain/repository`
-   - 서비스: `@{layer}/[feature]/domain/services`
-   - Repository 구현체: `@core/core-data/[feature]/repository.impl`
-   - Hooks: `@{layer}/[feature]/model/hooks/use-[name]`
-
-### Styling 전환 가이드라인
-
-1. **신규 코드**: Tailwind CSS 사용 필수
-2. **기존 Vanilla Extract 코드**: 해당 파일 수정 시 점진적으로 Tailwind로 전환
-3. **Tailwind 설정**: `tailwind.config.mjs`에서 JDS 디자인 토큰 사용
-   - 색상: `text-gray-500`, `bg-blue-100` 등
-   - 간격: `gap-8`, `p-16` 등 (숫자는 px 값)
-   - 폰트: `text-14`, `font-semibold` 등
-
-4. **Tailwind 커스텀 설정 주의사항** (기본값과 다름):
-   - `borderRadius`: 커스텀 스케일 사용 → `rounded-full` 대신 **`rounded-999`** 사용
-     - 사용 가능: `rounded-0`, `rounded-2`, `rounded-4`, `rounded-6`, `rounded-8`, `rounded-12`, `rounded-16`, `rounded-20`, `rounded-24`, `rounded-999`
-   - `spacing`: px 기반 스케일 사용 → `gap-4`는 4px (Tailwind 기본 16px 아님)
-   - `colors`: JDS 팔레트 사용 → `bg-base-white`, `text-gray-900` 등
-
-5. **File Organization**: Each layer segment can contain:
-   - `api/` - API call logic
-   - `model/` - Business logic (hooks, stores, types)
-   - `ui/` - UI components
-   - `lib/` - Utility functions
-   - `config/` - Configuration
-
-### File Naming Conventions
-
-- **Components**: PascalCase folders with `index.tsx`
-- **Hooks**: `use[Feature]` pattern in `model/` segments
-- **Server Components**: `index.server.ts`
-- **Types**: `[feature].types.ts`
-- **Tests**: `[feature].test.ts`
-
-## Key Features
-
-### Business Domains
-
-- **Workspace Management**: Multi-tenant workspace creation and management
-- **Applicant Management**: Job application tracking and recruitment workflows
-- **Job Posting**: Job posting creation and management
-- **Payment System**: SmartFit and advertising payment processing
-- **Authorization**: Role-based access control
-
-### Custom UI System
-
-- **BZW Components**: Custom design system components (BZWButton, BZWModal, etc.)
-- **Icons**: SVG icon system with automatic CSS generation
-- **Responsive Design**: Mobile-first approach
-
-### Development Features
-
-- **Hot Reload**: Development server with fast refresh
-- **Bundle Analysis**: Build analysis with @next/bundle-analyzer
-- **Error Monitoring**: Sentry integration
-- **Performance Monitoring**: OpenTelemetry instrumentation
-- **PDF Handling**: react-pdf integration for document viewing
-
-## Environment Setup
-
-### Prerequisites
-
-- Node.js 22.17.1 (managed with Volta)
-- pnpm package manager
-- SSL certificate setup for local development
-
-### SSL Certificate
+## Pre-Commit Checklist
 
 ```bash
-# Install mkcert
-brew install mkcert
-
-# Generate certificates
-pnpm cert
+pnpm lint && pnpm prettier && pnpm typecheck
 ```
 
-### Host Configuration
-
-Add to `/etc/hosts`:
-
-```
-127.0.0.1 hiringcenter.local.jobkorea.co.kr
-```
-
-## Testing Strategy
-
-- **Unit Tests**: Vitest with coverage reporting
-- **Integration Tests**: React Testing Library
-- **E2E Tests**: Playwright with test groups
-- **Performance Tests**: K6 for browser flow testing
-- **Visual Regression**: Included in E2E test suite
-
-## Code Quality
-
-### Linting & Formatting
-
-- **ESLint**: @jds/config-eslint (company standard)
-- **Prettier**: @jds/config-prettier
-- **TypeScript**: @jds/config-typescript
-- **Git Hooks**: Husky + lint-staged
-
-### Pre-Commit Checklist
-
-**코드를 커밋하기 전에 반드시 다음 체크리스트를 확인하세요:**
-
-1. **ESLint 검사**
-   ```bash
-   pnpm lint
-   ```
-   - 모든 lint 에러 수정 필수
-   - 경고는 가능하면 수정
-
-2. **Prettier 포맷팅**
-   ```bash
-   pnpm prettier
-   ```
-   - 코드 포맷 자동 정리
-
-3. **TypeScript 타입 체크**
-   ```bash
-   pnpm typecheck
-   ```
-   - 타입 에러 0개 확인 필수
-   - `any` 타입 사용 금지
-
-4. **전체 체크 (한 번에 실행)**
-   ```bash
-   pnpm lint && pnpm prettier && pnpm typecheck
-   ```
-
-**✅ 모든 체크가 통과한 후에만 커밋하세요!**
+모든 체크 통과 후에만 커밋하세요.
 
 ### Commit Convention
 
-```
-type: Subject
+`type: Subject` — Types: `feat`, `fix`, `docs`, `style`, `modify`, `refactor`, `test`, `chore`, `remove`, `rename`
 
-body (optional)
+---
 
-footer (optional)
-```
+## Environment Setup
 
-Types: `feat`, `fix`, `docs`, `style`, `modify`, `refactor`, `test`, `chore`, `remove`, `rename`
-
-## Deployment
-
-- **Build Output**: Standalone for containerized deployment
-- **Bundle Analysis**: Available via `pnpm build-analyze`
-- **Source Maps**: Enabled for production debugging
-- **Docker**: Dockerfile.local for local container testing
-
-## Active Technologies
-
-- TypeScript 5.8.3, Node.js 22.17.1 (Volta 관리) (001-company-api-integration)
-
-- TypeScript 5.8.3, React 19.1.0, Next.js 15.4.3 (002-ai-job-posting-upload)
-- N/A (클라이언트 사이드 상태 관리만 사용) (002-ai-job-posting-upload)
-
-- TypeScript 5.8.3, Node.js 22.17.1 (001-imgraph-file-upload)
-- S3 (via ImgraphSDK Pre-Signed URLs) (001-imgraph-file-upload)
-
-## Recent Changes
-
-- 001-imgraph-file-upload: Added TypeScript 5.8.3, Node.js 22.17.1
+- **Node.js**: 22.17.1 (Volta 관리)
+- **패키지 매니저**: pnpm
+- **로컬 호스트**: `127.0.0.1 hiringcenter.local.jobkorea.co.kr` (`/etc/hosts`에 추가)
+- **SSL**: `brew install mkcert && pnpm cert`
