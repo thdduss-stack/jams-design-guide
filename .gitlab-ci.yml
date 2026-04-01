@@ -1,0 +1,126 @@
+stages:
+  # - sonarqube
+  - notify
+  - ai-night
+
+# sonarqube-check:
+# stage: sonarqube
+# image:
+#   name: harbor.mgt.comm.jobkorea.co.kr/sonar-scanner-22/sonar-scanner-22:latest
+#   entrypoint: ['']
+# variables:
+#   GIT_DEPTH: '0' # Tells git to fetch all the branches of the project, required by the analysis task
+# script:
+#   - rm -rf .scannerwork
+#   - sed -i 's/\"bundler\"/\"node\"/g' tsconfig.json
+#   - npm install -g pnpm --force
+#   - pnpm install
+
+#   - |
+#     if [ "$CI_PIPELINE_SOURCE" == "merge_request_event" ]; then
+#       # MR인 경우: 전체 테스트 + PR 분석 모드
+#       echo "📊 MR 파이프라인: 전체 테스트 + SonarQube PR 스캔"
+#       pnpm run test:coverage
+#       sonar-scanner -X \
+#         -Dsonar.pullrequest.key=${CI_MERGE_REQUEST_IID} \
+#         -Dsonar.pullrequest.branch=${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME} \
+#         -Dsonar.pullrequest.base=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}
+#     else
+#       # 머지 후 푸시인 경우: 전체 테스트 (전체 커버리지 측정)
+#       echo "📊 머지 후 파이프라인: 전체 테스트 + SonarQube 스캔"
+#       pnpm run sonar
+#     fi
+# allow_failure: true
+# rules:
+#   - if: $AI_NIGHT == "true"
+#     when: never
+#   - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH =~ /^release.*/
+#   - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+mr-notification:
+  stage: notify
+  image: harbor.mgt.comm.jobkorea.co.kr/sonar-scanner-22/sonar-scanner-22:latest
+  variables:
+    PROJECT_ACCESS_TOKEN: $PROJECT_ACCESS_TOKEN
+    MR_DEBUG_MODE: 'true'
+  before_script:
+    # Git 설치 확인 (SonarQube 이미지는 이미 Git이 설치되어 있음)
+    - git --version || (apt-get update && apt-get install -y git)
+
+    # Nexus 레지스트리 및 인증 설정
+    - npm install -g pnpm
+    - npm config set @jds:registry https://nexus.mgt.comm.jobkorea.co.kr/repository/npm-store/
+    - npm config set //nexus.mgt.comm.jobkorea.co.kr/repository/npm-store/:_auth="${NEXUS_TOKEN}"
+
+    # @jds/mrnotification 패키지 설치
+    - echo "📦 @jds/mrnotification 패키지 설치..."
+    - pnpm install @jds/mrnotification@latest
+  script:
+    # 설치된 패키지로 직접 실행
+    - echo "📤 MR 알림 전송..."
+    - npx mr
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  allow_failure: true
+
+code_fix:
+  stage: ai-night
+  image: node:22
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $AI_NIGHT == "true"'
+  script:
+    - npm install -g pnpm --force
+    - pnpm install
+
+    - BRANCH="ai/code-fix-$CI_PIPELINE_ID"
+    - git checkout -b "$BRANCH"
+
+    - pnpm run lint -- --fix || true
+    - pnpm run prettier || true
+
+    - |
+      if [[ -n "$(git status --porcelain)" ]]; then
+        # 커밋 작성자 (메일은 당장 본인 메일 사용)
+        git config user.name "HiringCenter AI Bot"
+        git config user.email "smkim429@jobkorea.co.kr"
+
+        git add .
+        git commit -m "chore(ai): lint & prettier auto-fix"
+
+        # 토큰으로 push (origin push 대신 확실한 방식)
+        git push "https://oauth2:${GITLAB_TOKEN_TAG}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git" HEAD
+
+        # 열린 MR 존재 여부 확인 (source_branch 기준)
+        MR_LIST_JSON=$(curl -sS --header "PRIVATE-TOKEN: ${GITLAB_TOKEN_TAG}" \
+          "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened&source_branch=${BRANCH}")
+
+        EXISTING_IID=$(node -e '
+          const fs = require("fs");
+          const txt = fs.readFileSync(0,"utf8").trim();
+          if (!txt) process.exit(0);
+          let arr;
+          try { arr = JSON.parse(txt); } catch (e) { process.exit(0); }
+          const iid = Array.isArray(arr) && arr[0] && arr[0].iid ? String(arr[0].iid) : "";
+          process.stdout.write(iid);
+        ' <<< "$MR_LIST_JSON")
+
+        if [[ -n "$EXISTING_IID" ]]; then
+          echo "MR already exists (IID: $EXISTING_IID). Skipping MR creation."
+          exit 0
+        fi
+
+        # MR 생성 (Draft + 라벨 + Squash + Delete source branch)
+        curl --fail -sS --request POST \
+          --header "PRIVATE-TOKEN: ${GITLAB_TOKEN_TAG}" \
+          --form "source_branch=${BRANCH}" \
+          --form "target_branch=${CI_DEFAULT_BRANCH}" \
+          --form "title=[AI] chore: lint & prettier auto-fix" \
+          --form "labels=ai,autogen,lint" \
+          --form "remove_source_branch=true" \
+          --form "squash=true" \
+          "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests"
+
+        echo "MR created for branch ${BRANCH}"
+      else
+        echo "No changes"
+      fi

@@ -1,0 +1,532 @@
+/**
+ * BZWIcon 자동 생성된 아이콘 스타일 정의
+ *
+ * 이 파일은 scripts/bizcenter/create-svg-css.js에 의해 자동 생성됩니다.
+ * public/assets/images/svg 폴더의 SVG 파일들을 기반으로 CSS 클래스를 생성하며,
+ * 수동으로 편집하면 스크립트 실행 시 덮어쓰여집니다.
+ *
+ * @fileoverview 자동 생성된 아이콘 CSS 스타일
+ * @readonly
+ */
+
+.bz-icon--special_ai {
+  background-image: url('/assets/images/svg/special_ai.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_aimatching {
+  background-image: url('/assets/images/svg/special_aimatching.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_aos_logo {
+  background-image: url('/assets/images/svg/special_aos_logo.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_bar_graph {
+  background-image: url('/assets/images/svg/special_bar_graph.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_bar_graph_gray {
+  background-image: url('/assets/images/svg/special_bar_graph_gray.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_basicmail {
+  background-image: url('/assets/images/svg/special_basicmail.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_card_index {
+  background-image: url('/assets/images/svg/special_card_index.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_caution {
+  background-image: url('/assets/images/svg/special_caution.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_chip_baroalba {
+  background-image: url('/assets/images/svg/special_chip_baroalba.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_cpc_off {
+  background-image: url('/assets/images/svg/special_cpc-off.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_cpc {
+  background-image: url('/assets/images/svg/special_cpc.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_cursor {
+  background-image: url('/assets/images/svg/special_cursor.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_desktop {
+  background-image: url('/assets/images/svg/special_desktop.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_duty {
+  background-image: url('/assets/images/svg/special_duty.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_email {
+  background-image: url('/assets/images/svg/special_email.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_email_noti {
+  background-image: url('/assets/images/svg/special_email_noti.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_empty {
+  background-image: url('/assets/images/svg/special_empty.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_file_excel {
+  background-image: url('/assets/images/svg/special_file_excel.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_file_pdf {
+  background-image: url('/assets/images/svg/special_file_pdf.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_file_sheet {
+  background-image: url('/assets/images/svg/special_file_sheet.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_fileexcel {
+  background-image: url('/assets/images/svg/special_fileexcel.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_filezip {
+  background-image: url('/assets/images/svg/special_filezip.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_folder {
+  background-image: url('/assets/images/svg/special_folder.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_headset {
+  background-image: url('/assets/images/svg/special_headset.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_icon_check {
+  background-image: url('/assets/images/svg/special_icon_check.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_id {
+  background-image: url('/assets/images/svg/special_id.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_id_card {
+  background-image: url('/assets/images/svg/special_id_card.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_id_card_green {
+  background-image: url('/assets/images/svg/special_id_card_green.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_id_v2 {
+  background-image: url('/assets/images/svg/special_id_v2.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_infofail {
+  background-image: url('/assets/images/svg/special_infofail.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_invite {
+  background-image: url('/assets/images/svg/special_invite.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_ios_logo {
+  background-image: url('/assets/images/svg/special_ios_logo.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_key {
+  background-image: url('/assets/images/svg/special_key.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_map {
+  background-image: url('/assets/images/svg/special_map.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_map_green {
+  background-image: url('/assets/images/svg/special_map_green.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_member {
+  background-image: url('/assets/images/svg/special_member.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_memo {
+  background-image: url('/assets/images/svg/special_memo.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_money_bag {
+  background-image: url('/assets/images/svg/special_money_bag.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_noti {
+  background-image: url('/assets/images/svg/special_noti.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_notiorange {
+  background-image: url('/assets/images/svg/special_notiorange.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_notired {
+  background-image: url('/assets/images/svg/special_notired.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_office_idshare {
+  background-image: url('/assets/images/svg/special_office_idshare.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_office_money {
+  background-image: url('/assets/images/svg/special_office_money.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_on_ai {
+  background-image: url('/assets/images/svg/special_on_ai.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_on_ats {
+  background-image: url('/assets/images/svg/special_on_ats.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_position_offer_yellow {
+  background-image: url('/assets/images/svg/special_position_offer_yellow.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_search {
+  background-image: url('/assets/images/svg/special_search.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_search_office {
+  background-image: url('/assets/images/svg/special_search_office.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_search_report {
+  background-image: url('/assets/images/svg/special_search_report.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_sent_message_yellow {
+  background-image: url('/assets/images/svg/special_sent_message_yellow.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_smart_fit {
+  background-image: url('/assets/images/svg/special_smart_fit.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_star {
+  background-image: url('/assets/images/svg/special_star.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_target_green {
+  background-image: url('/assets/images/svg/special_target_green.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_time {
+  background-image: url('/assets/images/svg/special_time.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_welcome {
+  background-image: url('/assets/images/svg/special_welcome.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_write {
+  background-image: url('/assets/images/svg/special_write.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_ws {
+  background-image: url('/assets/images/svg/special_ws.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}
+
+.bz-icon--special_z {
+  background-image: url('/assets/images/svg/special_z.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+}

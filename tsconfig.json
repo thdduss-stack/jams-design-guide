@@ -1,0 +1,23 @@
+{
+  "extends": ["@jds/config-typescript/next.json"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2022",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "inlineSources": true,
+    "noImplicitAny": true,
+    "sourceRoot": "/",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@features/*": ["src/features/*"],
+      "@entities/*": ["src/entities/*"],
+      "@shared/*": ["src/shared/*"],
+      "@views/*": ["src/views/*"],
+      "@core/*": ["src/core/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "playwright.config.mjs"],
+  "exclude": ["node_modules", ".next"]
+}

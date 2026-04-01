@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>페이지를 찾을 수 없습니다</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          Pretendard,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .error-container,
+      .content-wrapper,
+      .img-title-section,
+      .title-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .error-container {
+        gap: 40px;
+        justify-content: center;
+      }
+      .content-wrapper {
+        gap: 40px;
+      }
+      .img-title-section {
+        gap: 16px;
+        width: 400px;
+        max-width: 100%;
+      }
+      .error-image {
+        width: 80px;
+        height: 80px;
+      }
+      .title-section {
+        gap: 8px;
+        width: 100%;
+      }
+      .main-title {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 1.333;
+        letter-spacing: -0.5px;
+        text-align: center;
+        color: #222;
+        word-break: keep-all;
+      }
+      .sub-title {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.571;
+        text-align: center;
+        color: #444;
+        word-break: keep-all;
+      }
+      .mobile-br {
+        display: none;
+      }
+      @media (max-width: 480px) {
+        .img-title-section {
+          width: 100%;
+        }
+        .main-title {
+          font-size: 20px;
+        }
+        .sub-title {
+          font-size: 13px;
+        }
+        .mobile-br {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-container">
+      <div class="content-wrapper">
+        <div class="img-title-section">
+          <img
+            id="errorImage"
+            src="https://bizcenter.jobkorea.co.kr:4200/bizcenter/images/svg/special_notired.svg"
+            alt="Error Icon"
+            class="error-image"
+          />
+          <div class="title-section">
+            <h1 class="main-title">요청하신 페이지를<br class="mobile-br" />찾을 수 없습니다</h1>
+            <p class="sub-title">페이지 URL 또는<br class="mobile-br" />네트워크 상태를 확인해 주세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      !(function () {
+        var e = document.getElementById('errorImage'),
+          r = 'https://bizcenter.jobkorea.co.kr/bizcenter/images/error/jobko.svg',
+          o = !1,
+          t = setTimeout(function () {
+            o || (e.src = r);
+          }, 1e3);
+        (e.addEventListener('load', function () {
+          ((o = !0), clearTimeout(t));
+        }),
+          e.addEventListener('error', function () {
+            -1 === e.src.indexOf(r) && (clearTimeout(t), (e.src = r));
+          }));
+      })();
+    </script>
+  </body>
+</html>

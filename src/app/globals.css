@@ -1,0 +1,378 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 스크롤바 숨김 유틸리티 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* 호버 시에만 스크롤바 보이기 (항상 공간 확보) */
+.scrollbar-hover-show {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.scrollbar-hover-show::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-hover-show::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-hover-show::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 3px;
+}
+.scrollbar-hover-show:hover {
+  scrollbar-color: #d1d5db transparent;
+}
+.scrollbar-hover-show:hover::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+}
+.scrollbar-hover-show:hover::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading 컴포넌트 - 그라데이션 회전 애니메이션 */
+@keyframes gradientRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1);
+  }
+}
+
+/* Loading 컴포넌트 - 그라데이션 색상 변화 애니메이션 */
+@keyframes gradientColorShift {
+  0%,
+  100% {
+    background: linear-gradient(
+      135deg,
+      rgba(147, 181, 255, 0.4) 0%,
+      rgba(235, 164, 255, 0.4) 50%,
+      rgba(118, 75, 162, 0.4) 100%
+    );
+    opacity: 0.8;
+  }
+  33% {
+    background: linear-gradient(
+      135deg,
+      rgba(147, 181, 255, 0.4) 0%,
+      rgba(235, 164, 255, 0.4) 50%,
+      rgba(118, 75, 162, 0.4) 100%
+    );
+    opacity: 1;
+  }
+  66% {
+    background: linear-gradient(
+      135deg,
+      rgba(147, 181, 255, 0.4) 0%,
+      rgba(235, 164, 255, 0.4) 50%,
+      rgba(118, 75, 162, 0.4) 100%
+    );
+    opacity: 0.9;
+  }
+}
+
+/* Loading 컴포넌트 - 타이틀 페이드인 */
+@keyframes titleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading 컴포넌트 - 아이콘 펄스 */
+@keyframes iconPulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.02);
+  }
+}
+
+/* Loading 컴포넌트 - 스켈레톤 웨이브 */
+@keyframes skeletonWave {
+  0% {
+    background-position: -100% 0;
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    background-position: 100% 0;
+    opacity: 0.5;
+  }
+}
+
+/* LayoutApplicantDetail 모달 애니메이션 */
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modalFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes modalScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalScaleOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+.modal-fade-in {
+  animation: modalFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.modal-fade-out {
+  animation: modalFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.modal-scale-in {
+  animation: modalScaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.modal-scale-out {
+  animation: modalScaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* AG Grid root wrapper border-radius 제거 */
+.ag-root-wrapper {
+  border-radius: 0 !important;
+}
+
+/* AG Grid 체크박스 헤더 오른쪽 border 제거 */
+.checkbox-header-no-border {
+  border-right: none !important;
+}
+
+/* AG Grid 체크박스 헤더 셀 중앙 정렬 */
+.ag-header-cell:first-child .ag-header-cell-comp-wrapper {
+  justify-content: center;
+}
+
+/* AG Grid 헤더 셀 중앙 정렬 */
+.ag-center-aligned-header .ag-header-cell-label {
+  justify-content: center;
+}
+
+/* AG Grid 선택된(체크된) 행 배경색 - blue54 */
+.ag-root-wrapper .ag-center-cols-container .ag-row.ag-row-selected:not(.no-hover-effect),
+.ag-root-wrapper .ag-center-cols-viewport .ag-row.ag-row-selected:not(.no-hover-effect) {
+  background-color: var(--palette-blue-blue54) !important;
+}
+
+.ag-root-wrapper .ag-center-cols-container .ag-row.ag-row-selected:not(.no-hover-effect) .ag-cell,
+.ag-root-wrapper .ag-center-cols-viewport .ag-row.ag-row-selected:not(.no-hover-effect) .ag-cell {
+  background-color: var(--palette-blue-blue54) !important;
+}
+
+/* AG Grid 선택된(체크된) 행 + hover 배경색 - blue50 */
+.ag-root-wrapper .ag-center-cols-container .ag-row.ag-row-selected:not(.no-hover-effect):hover,
+.ag-root-wrapper .ag-center-cols-viewport .ag-row.ag-row-selected:not(.no-hover-effect):hover {
+  background-color: var(--palette-blue-blue50) !important;
+}
+
+.ag-root-wrapper .ag-center-cols-container .ag-row.ag-row-selected:not(.no-hover-effect):hover .ag-cell,
+.ag-root-wrapper .ag-center-cols-viewport .ag-row.ag-row-selected:not(.no-hover-effect):hover .ag-cell {
+  background-color: var(--palette-blue-blue50) !important;
+}
+
+/* AG Grid 선택 가능한 행에만 hover 효과 추가 - gray-50 */
+.ag-root-wrapper .ag-center-cols-container .ag-row:not(.no-hover-effect):not(.ag-row-selected):hover,
+.ag-root-wrapper .ag-center-cols-viewport .ag-row:not(.no-hover-effect):not(.ag-row-selected):hover {
+  background-color: rgba(249, 249, 251, 1) !important;
+}
+
+.ag-root-wrapper .ag-center-cols-container .ag-row:not(.no-hover-effect):not(.ag-row-selected):hover .ag-cell,
+.ag-root-wrapper .ag-center-cols-viewport .ag-row:not(.no-hover-effect):not(.ag-row-selected):hover .ag-cell {
+  background-color: rgba(249, 249, 251, 1) !important;
+}
+
+/* AG Grid 활동내역 테이블 - 링크/버튼만 pointer, 나머지는 default */
+/* 먼저 링크/버튼에 pointer를 명시적으로 적용 (최우선) */
+.workspace-activity-table .ag-root-wrapper a,
+.workspace-activity-table .ag-root-wrapper a *,
+.workspace-activity-table .ag-root-wrapper .activity-link,
+.workspace-activity-table .ag-root-wrapper .activity-link *,
+.workspace-activity-table .ag-root-wrapper button,
+.workspace-activity-table .ag-root-wrapper button *,
+.workspace-activity-table .ag-root-wrapper .cursor-pointer,
+.workspace-activity-table .ag-root-wrapper .cursor-pointer * {
+  cursor: pointer !important;
+}
+
+.workspace-activity-table .ag-root-wrapper .ag-row:hover a,
+.workspace-activity-table .ag-root-wrapper .ag-row:hover a *,
+.workspace-activity-table .ag-root-wrapper .ag-row:hover .activity-link,
+.workspace-activity-table .ag-root-wrapper .ag-row:hover .activity-link *,
+.workspace-activity-table .ag-root-wrapper .ag-row:hover button,
+.workspace-activity-table .ag-root-wrapper .ag-row:hover button *,
+.workspace-activity-table .ag-root-wrapper .ag-row:hover .cursor-pointer,
+.workspace-activity-table .ag-root-wrapper .ag-row:hover .cursor-pointer * {
+  cursor: pointer !important;
+}
+
+/* 그 다음 셀에 기본 cursor 설정 (!important 없이) */
+.workspace-activity-table .ag-root-wrapper .ag-cell {
+  cursor: default;
+}
+
+.workspace-activity-table .ag-root-wrapper .ag-row:hover .ag-cell {
+  cursor: default;
+}
+
+/* AG Grid 지원 취소/만료된 행 - gray-50 배경색 유지 (최고 우선순위) */
+div.ag-row.no-hover-effect:not(.ag-row-selected),
+div.ag-row.no-hover-effect:not(.ag-row-selected):hover,
+div.ag-row.no-hover-effect:not(.ag-row-selected):active,
+div.ag-row.no-hover-effect:not(.ag-row-selected):focus,
+div.ag-row.no-hover-effect,
+div.ag-row.no-hover-effect:hover,
+div.ag-row.no-hover-effect:active,
+div.ag-row.no-hover-effect:focus {
+  background-color: #f7f7f7 !important;
+  cursor: not-allowed !important;
+}
+
+div.ag-row.no-hover-effect:not(.ag-row-selected) div.ag-cell,
+div.ag-row.no-hover-effect:not(.ag-row-selected):hover div.ag-cell,
+div.ag-row.no-hover-effect:not(.ag-row-selected):active div.ag-cell,
+div.ag-row.no-hover-effect:not(.ag-row-selected):focus div.ag-cell,
+div.ag-row.no-hover-effect div.ag-cell,
+div.ag-row.no-hover-effect:hover div.ag-cell,
+div.ag-row.no-hover-effect:active div.ag-cell,
+div.ag-row.no-hover-effect:focus div.ag-cell {
+  background-color: #f7f7f7 !important;
+  cursor: not-allowed !important;
+}
+
+/* AI 그라데이션 텍스트 */
+.gradient-text-ai {
+  background: linear-gradient(165deg, var(--palette-blue-blue650) 3.25%, var(--palette-violet-violet600) 109.05%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-ai-100deg {
+  background: linear-gradient(100deg, var(--palette-blue-blue650) -3.25%, var(--palette-violet-violet600) 109.05%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Toast 중앙 정렬 수정 (--width: auto 사용 시 sonner 기본 센터링이 깨지는 문제) */
+[data-sonner-toaster][data-x-position='center'] {
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+}
+
+[data-sonner-toaster][data-x-position='center'][data-lifted='true'] {
+  transform: translateY(-10px) !important;
+}
+
+[data-sonner-toaster][data-x-position='center'] [data-sonner-toast] {
+  left: 0 !important;
+  right: 0 !important;
+  width: fit-content !important;
+  margin-inline: auto !important;
+}

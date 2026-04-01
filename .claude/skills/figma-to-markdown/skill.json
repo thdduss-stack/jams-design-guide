@@ -1,0 +1,23 @@
+{
+  "name": "figma-to-markdown",
+  "description": "Figma 기획서를 UI 로직 마크다운 문서로 자동 변환",
+  "version": "1.0.0",
+  "author": "BizCenter Team",
+  "trigger": {
+    "command": "/figma-to-markdown",
+    "aliases": ["/f2md", "/figma-md"]
+  },
+  "parameters": [
+    {
+      "name": "figmaUrl",
+      "description": "Figma 기획서 URL (node-id 포함)",
+      "required": true,
+      "type": "string",
+      "example": "https://figma.com/design/abc123/Spec?node-id=1-2"
+    }
+  ],
+  "output": {
+    "type": "file",
+    "path": "docs/ui-logic/{feature-name}.md"
+  }
+}

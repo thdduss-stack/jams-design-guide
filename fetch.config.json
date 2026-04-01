@@ -1,0 +1,110 @@
+[
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/hiring-center",
+    "dataLayer": "./src/core/core-data/home",
+    "presentationLayer": "./src/core/presentation/home",
+    "apiName": "home-api",
+    "baseUrlEnv": "HOME_API_URL",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://auth.dev.jobkorea.co.kr/v3/api-docs",
+    "dataLayer": "./src/core/core-data/auth",
+    "apiName": "workspace-auth-api",
+    "baseUrlEnv": "WORKSPACE_AUTH_API_URL",
+    "clientProxyPath": "/bizcenter/api/display/workspace/auth",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/ats",
+    "dataLayer": "./src/core/core-data/ats",
+    "apiName": "ats-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/jobposting",
+    "dataLayer": "./src/core/core-data/jobs",
+    "apiName": "jobs-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/upload",
+    "dataLayer": "./src/core/core-data/upload",
+    "apiName": "upload-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/company",
+    "dataLayer": "./src/core/core-data/company",
+    "apiName": "company-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/general",
+    "dataLayer": "./src/core/core-data/general",
+    "apiName": "general-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/resume",
+    "dataLayer": "./src/core/core-data/resume",
+    "apiName": "resume-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/commerce",
+    "dataLayer": "./src/core/core-data/commerce",
+    "apiName": "commerce-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/proposal",
+    "dataLayer": "./src/core/core-data/proposal",
+    "apiName": "proposal-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/report",
+    "dataLayer": "./src/core/core-data/reports",
+    "apiName": "reports-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  },
+  {
+    "url": "https://bizcenter-display.dev.jobkorea.co.kr/v3/api-docs/talent",
+    "dataLayer": "./src/core/core-data/talent",
+    "apiName": "talent-api",
+    "baseUrlEnv": "DISPLAY_API_URL_BIZCENTER",
+    "clientProxyPath": "/bizcenter/api/display",
+    "includePaths": [],
+    "excludePaths": []
+  }
+]

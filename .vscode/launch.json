@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: debug full stack",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm run dev",
+      "serverReadyAction": {
+        "pattern": "on https://search.local.jobkorea.co.kr:([0-9]+)",
+        "uriFormat": "https://search.local.jobkorea.co.kr:%s",
+        "action": "debugWithChrome"
+      }
+    }
+  ]
+}

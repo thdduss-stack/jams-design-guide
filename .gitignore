@@ -1,0 +1,63 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+!src/app/api/kmc/kmcert-ca.pem
+/cert
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.cursor/debug.log
+
+# local env files
+.env
+__ENV__*.js
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# playwright
+playwright-output
+
+# IDEs and editors
+.idea
+.cursor/mcp.json
+
+# k6
+test-runner-profile
+
+src/types/lib/temp/**/*
+
+.scannerwork
+.sonarlint
+
+.pnpm-store
+
+.claude/settings.local.json
+
+.specify/
+/specs/
+src_back
