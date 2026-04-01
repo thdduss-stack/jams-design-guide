@@ -45,7 +45,7 @@
 
 ### 1.3 대상 환경
 
-- **데스크톱 전용** (최소 1216px ~ 최대 1856px)
+- **데스크톱 전용** (최소 1038px ~ 최대 1856px)
 - 모바일/태블릿은 별도 프로젝트에서 대응
 - 폰트: **Pretendard** (한글 최적화 웹폰트)
 
@@ -480,11 +480,14 @@
 
 | 속성 | Tailwind | 이유 |
 |------|---------|------|
-| 최소 너비 | `min-w-[1216px]` | 가장 작은 데스크톱 해상도 대응 |
+| 최소 너비 | `min-w-[1038px]` | 가장 작은 데스크톱 해상도 대응 |
 | 최대 너비 | `max-w-[1856px]` | 4K 모니터에서 과도한 확장 방지 |
+| 콘텐츠 최대 너비 | `max-w-[960px]` | 독립 페이지(랜딩/소개)에서 가독성 확보 |
 | 중앙 정렬 | `mx-auto` | 큰 화면에서 좌측 치우침 방지 |
 | 전체 높이 | `h-screen max-h-screen` | 사이드 네비와 함께 고정 레이아웃 |
 | 수평 오버플로우 | `overflow-x-auto` | 최소 너비 이하 화면 대응 |
+
+> **참고**: 사이드 네비가 없는 독립 페이지(랜딩, 상품 소개 등)는 콘텐츠 영역을 `max-w-[960px]`로 제한하여 좌우 여백을 넉넉하게 확보합니다. 답답하지 않은 레이아웃을 위해 섹션 간에 충분한 수직 여백(`py-80`)을 사용하세요.
 
 ### 8.3 카드 구성 패턴
 
@@ -573,6 +576,55 @@
 | 아이콘만 있는 버튼 | BZWIconBtn | 삭제, 편집, 더보기 등 |
 | 아이콘 + 텍스트 | BZWIconTextBtn | "추가하기", "편집하기" 등 |
 | 토글 (켜기/끄기) | BZWToggleIconBtn | 즐겨찾기, 알림 설정 등 |
+
+#### 폼 요소
+
+> HTML 네이티브 폼 요소 대신 반드시 `@jds/theme`의 컴포넌트를 사용하세요.
+> 디자인 일관성과 접근성, 테마 연동이 자동으로 보장됩니다.
+
+| HTML 요소 | JDS 컴포넌트 | import | 주요 Props |
+|-----------|-------------|--------|-----------|
+| `<button>` | `Button` | `import { Button } from '@jds/theme'` | `variant`: `'contained'`(기본) · `'outlined'` / `size`: `'32'` · `'40'`(기본) · `'48'` · `'52'` · `'56'` / `color`: `'primary'`(기본) · `'accent'` · `'black'` · `'secondery'` |
+| `<input type="text">` | `TextField.Root` | `import { TextField } from '@jds/theme'` | `size`: `'medium'`(기본) · `'small'` / `variant`: `'default'`(기본) · `'error'` / `placeholder`, `value`, `onChange` 등 HTML input 속성 그대로 사용 |
+| `<input type="checkbox">` | `Checkbox` | `import { Checkbox } from '@jds/theme'` | `size`: `'medium'` · `'small'`(기본) / `checked`, `onCheckedChange`, `disabled` |
+| `<input type="radio">` | `RadioGroup.Root` + `RadioGroup.Item` | `import { RadioGroup } from '@jds/theme'` | Root: `value`, `onValueChange` / Item: `value`(필수), `size`: `'medium'` · `'small'`(기본), `disabled` |
+| `<select>` | `SelectBox.Root` + `SelectBox.Trigger` + `SelectBox.Content` + `SelectBox.Item` | `import { SelectBox } from '@jds/theme'` | Root: `value`, `onValueChange`, `size`: `'medium'`(기본) · `'small'` / `variant`: `'button'` · `'none'` |
+
+**사용 예시:**
+
+```tsx
+// Button
+<Button variant="contained" size="40" color="primary">저장</Button>
+<Button variant="outlined" size="40" color="primary">취소</Button>
+
+// TextField
+<TextField.Root size="medium" placeholder="이름을 입력하세요" />
+
+// Checkbox
+<Checkbox size="small" checked={checked} onCheckedChange={setChecked} />
+
+// RadioGroup
+<RadioGroup.Root value={value} onValueChange={setValue}>
+  <RadioGroup.Item value="option1" size="small">옵션 1</RadioGroup.Item>
+  <RadioGroup.Item value="option2" size="small">옵션 2</RadioGroup.Item>
+</RadioGroup.Root>
+
+// SelectBox
+<SelectBox.Root value={selected} onValueChange={setSelected} size="medium">
+  <SelectBox.Trigger>
+    <SelectBox.Value placeholder="선택하세요" />
+  </SelectBox.Trigger>
+  <SelectBox.Content>
+    <SelectBox.Item value="opt1">옵션 1</SelectBox.Item>
+    <SelectBox.Item value="opt2">옵션 2</SelectBox.Item>
+  </SelectBox.Content>
+</SelectBox.Root>
+```
+
+**금지:**
+- `<button>`, `<input>`, `<select>` 등 HTML 네이티브 폼 요소를 직접 사용하지 마세요
+- 외부 UI 라이브러리의 폼 컴포넌트(MUI, Ant Design 등) 사용 금지
+- JDS 컴포넌트의 스타일을 CSS로 직접 오버라이드하지 마세요 — props로 제어
 
 #### 모달 & 오버레이
 

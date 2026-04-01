@@ -66,7 +66,7 @@ Figma 디자인을 Claude를 통해 바로 코드로 변환하며, 디자인-코
 
 핵심 요약:
 - **테마**: 잡코리아(파랑 Primary) / 알바몬(주황 Primary) 듀얼 브랜드
-- **데스크톱 전용**: 최소 1216px ~ 최대 1856px
+- **데스크톱 전용**: 최소 1038px ~ 최대 1856px
 - **폰트**: Pretendard
 - **색상**: 역할 기반 색상 사용 (HEX 직접 사용 지양)
 
@@ -95,9 +95,24 @@ Figma 디자인을 Claude를 통해 바로 코드로 변환하며, 디자인-코
 
 ---
 
+## 폼 요소 컴포넌트 (`@jds/theme`)
+
+HTML 네이티브 폼 요소 대신 반드시 `@jds/theme` 컴포넌트를 사용:
+
+| HTML | JDS 컴포넌트 | import |
+|------|-------------|--------|
+| `<button>` | `Button` | `import { Button } from '@jds/theme'` |
+| `<input type="text">` | `TextField.Root` | `import { TextField } from '@jds/theme'` |
+| `<input type="checkbox">` | `Checkbox` | `import { Checkbox } from '@jds/theme'` |
+| `<input type="radio">` | `RadioGroup.Root` + `RadioGroup.Item` | `import { RadioGroup } from '@jds/theme'` |
+| `<select>` | `SelectBox.Root` + `SelectBox.Trigger` + `SelectBox.Content` + `SelectBox.Item` | `import { SelectBox } from '@jds/theme'` |
+
+---
+
 ## 금지 패턴
 
 - `any` 타입 사용 금지 → 명확한 interface 정의
+- HTML 네이티브 폼 요소(`<button>`, `<input>`, `<select>`) 직접 사용 금지 → `@jds/theme` 컴포넌트 사용
 - inline style 금지 → 우선적으로 컴포넌트 props사용 후 안될경우 Tailwind 클래스 사용
 - margin/padding 대신 gap 사용 (레이아웃에서)
 - 디자인 레이어에 컴포넌트로 사용했을 경우 분리

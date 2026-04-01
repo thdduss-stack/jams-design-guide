@@ -6,9 +6,9 @@ import '@jds/theme/theme.css';
 import '@jds/theme/pretendard.css';
 import '@jk/react-pc/react-pc.css';
 import 'ckeditor5/ckeditor5.css';
+import { ThemeProvider } from '@jds/theme';
 
 export const dynamic = 'force-dynamic';
-
 
 export default function RootLayout({
   children,
@@ -42,10 +42,9 @@ export default function RootLayout({
           href={`${process.env.NEXT_PUBLIC_ASSETS_CF}/hiringcenter/assets/styles/editor-styles.css`}
           rel='stylesheet'
         />
-
       </head>
       <body>
-        {children}
+        <ThemeProvider theme='jobkorea'>{children}</ThemeProvider>
       </body>
     </html>
   );
