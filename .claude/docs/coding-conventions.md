@@ -64,28 +64,13 @@ const handleButtonClick = useCallback(() => { ... }, []);
 | alt 텍스트 누락 | 반드시 alt/aria-label |
 | 새 아이콘 패키지 설치 | BZWIcon / @jds/theme Icon |
 
-## 커밋 컨벤션
+배럴 파일 금지 예시:
+```typescript
+// ❌
+import { Company } from '@core/domain/company';
 
-```
-feat: 새 기능 추가
-fix: 버그 수정
-docs: 문서 업데이트
-style: 스타일 변경
-modify: 기능 수정 (feat 아닌 수정)
-refactor: 리팩토링 (기능 변경 없음)
-test: 테스트 추가/수정
-chore: 빌드/설정 변경
-remove: 코드/파일 삭제
-rename: 이름 변경
-```
-
-형식: `type: Subject` (한국어 Subject 권장)
-
-예시:
-```
-feat: 채용공고 필터 컴포넌트 추가
-fix: 지원자 목록 페이지네이션 버그 수정
-modify: 회사 카드 레이아웃 조정
+// ✅
+import { Company } from '@core/domain/company/entities';
 ```
 
 ## 이미지/접근성
@@ -97,4 +82,19 @@ modify: 회사 카드 레이아웃 조정
 
 // ❌ alt 누락 금지
 <img src={logo} />
+```
+
+## 커밋 컨벤션
+
+```
+feat | fix | docs | style | modify | refactor | test | chore | remove | rename
+```
+
+형식: `type: Subject` (한국어 Subject 권장)
+
+예시:
+```
+feat: 채용공고 필터 컴포넌트 추가
+fix: 지원자 목록 페이지네이션 버그 수정
+modify: 회사 카드 레이아웃 조정
 ```

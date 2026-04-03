@@ -10,8 +10,8 @@ model: haiku
 # Diff Reviewer
 
 ## 참조 문서
-- JDS 규칙: `.claude/agents/docs/jds-design-system.md`
-- 코딩 컨벤션: `.claude/agents/docs/coding-conventions.md`
+- 디자인 시스템: `.claude/docs/design-system.md`
+- 코딩 컨벤션: `.claude/docs/coding-conventions.md`
 
 ## 실행 흐름
 

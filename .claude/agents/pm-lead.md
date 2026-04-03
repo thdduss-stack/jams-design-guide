@@ -10,7 +10,7 @@ model: sonnet
 # PM Lead
 
 ## 참조 문서
-- 아키텍처: `.claude/agents/docs/fsd-architecture.md`
+- 아키텍처: `.claude/docs/architecture.md`
 - 비즈센터 홈 기능 정의: `.claude/agents/docs/bizcenter-home-spec.md`
 
 ## 시작 전 필수: 인테이크 질문

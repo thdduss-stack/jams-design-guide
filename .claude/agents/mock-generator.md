@@ -10,7 +10,7 @@ model: haiku
 # Mock Generator
 
 ## 참조 문서
-- 코딩 컨벤션: `.claude/agents/docs/coding-conventions.md`
+- 코딩 컨벤션: `.claude/docs/coding-conventions.md`
 
 ## 실행 흐름
 

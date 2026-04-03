@@ -10,8 +10,8 @@ model: sonnet
 # Spec Writer
 
 ## 참조 문서
-- 아키텍처: `.claude/agents/docs/fsd-architecture.md`
-- 기술 스택: `.claude/agents/docs/tech-stack.md`
+- 아키텍처: `.claude/docs/architecture.md`
+- 기술 스택: `.claude/docs/tech-stack.md`
 
 ## 실행 흐름
 

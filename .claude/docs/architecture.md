@@ -49,6 +49,7 @@ core/core-data/{feature}/   → Data Layer (dto, mapper, api, repository.impl)
 | 단일 비즈니스 기능 | `features/{feature}/` |
 | 공통 UI 컴포넌트 | `shared/ui/` |
 | 비즈니스 엔티티 | `entities/{name}/` |
+| Mock 데이터 | `src/{layer}/{feature}/model/mock/{component}.mock.ts` |
 
 ## 배럴 파일 금지
 
@@ -84,16 +85,6 @@ export default function JobsPage() {
 디자인 레이어에 컴포넌트로 사용된 경우 반드시 분리:
 
 ```tsx
-// ❌ 한 파일에 모든 것
-function JobListView() {
-  return (
-    <div>
-      <div className="header">...</div>  // 분리 필요
-      <div className="list">...</div>    // 분리 필요
-    </div>
-  );
-}
-
 // ✅ 컴포넌트 분리
 import { JobListHeader } from './JobListHeader';
 import { JobListBody } from './JobListBody';

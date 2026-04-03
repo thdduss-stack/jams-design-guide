@@ -13,6 +13,7 @@
 | Zustand | 5.x |
 | TanStack Query | 5.x |
 | React Hook Form | 7.x + Zod |
+| Vitest + Playwright | 테스트 |
 
 ## 아웃풋 코드 표준
 
@@ -69,3 +70,4 @@ pnpm lint && pnpm prettier && pnpm typecheck
 - Node.js: 22.17.1 (Volta 관리)
 - 패키지 매니저: pnpm
 - 로컬 호스트: `hiringcenter.local.jobkorea.co.kr`
+- SSL: `brew install mkcert && pnpm cert`

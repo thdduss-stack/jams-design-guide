@@ -438,7 +438,5 @@ const mockHomeData = {
 ## 관련 문서
 
 - 기능 정의: `.claude/agents/docs/bizcenter-home-spec.md`
-- BizJAMS 토큰: `.claude/agents/docs/bizjams-tokens.md`
-- 컬러 팔레트: `.claude/agents/docs/jams-color-palette.md`
-- 버튼 스펙: `.claude/agents/docs/jams-button-specs.md`
-- 비주얼 패턴: `.claude/agents/docs/visual-design-patterns.md`
+- 디자인 시스템 (토큰/버튼/컬러): `.claude/docs/design-system.md`
+- 비주얼 패턴: `.claude/docs/design-patterns.md`

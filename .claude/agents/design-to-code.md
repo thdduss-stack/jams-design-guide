@@ -11,10 +11,10 @@ model: sonnet
 # Design-to-Code
 
 ## 참조 문서 (작업 전 반드시 읽기)
-- JDS 규칙: `.claude/agents/docs/jds-design-system.md`
-- 기술 스택: `.claude/agents/docs/tech-stack.md`
-- 아키텍처: `.claude/agents/docs/fsd-architecture.md`
-- 코딩 컨벤션: `.claude/agents/docs/coding-conventions.md`
+- 디자인 시스템: `.claude/docs/design-system.md`
+- 기술 스택: `.claude/docs/tech-stack.md`
+- 아키텍처: `.claude/docs/architecture.md`
+- 코딩 컨벤션: `.claude/docs/coding-conventions.md`
 - 비즈센터 홈 디자인: `.claude/agents/docs/bizcenter-home-design.md`
 - 비즈센터 홈 기능: `.claude/agents/docs/bizcenter-home-spec.md`
 

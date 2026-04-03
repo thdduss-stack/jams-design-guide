@@ -10,9 +10,9 @@ model: sonnet
 # QA Checker
 
 ## 참조 문서 (검증 기준)
-- JDS 규칙: `.claude/agents/docs/jds-design-system.md`
-- 코딩 컨벤션: `.claude/agents/docs/coding-conventions.md`
-- 아키텍처: `.claude/agents/docs/fsd-architecture.md`
+- 디자인 시스템: `.claude/docs/design-system.md`
+- 코딩 컨벤션: `.claude/docs/coding-conventions.md`
+- 아키텍처: `.claude/docs/architecture.md`
 
 ## 검증 실행
 

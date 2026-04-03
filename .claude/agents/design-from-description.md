@@ -14,10 +14,9 @@ model: sonnet
 
 ## 참조 문서 (작업 전 반드시 읽기)
 
-- 비주얼 패턴: `.claude/agents/docs/visual-design-patterns.md`
-- JDS 시스템: `.claude/agents/docs/jds-design-system.md`
-- BizJAMS 토큰: `.claude/agents/docs/bizjams-tokens.md`
-- 기술 스택: `.claude/agents/docs/tech-stack.md`
+- 디자인 시스템: `.claude/docs/design-system.md`
+- 디자인 패턴: `.claude/docs/design-patterns.md`
+- 기술 스택: `.claude/docs/tech-stack.md`
 
 ## 기본 페르소나
 

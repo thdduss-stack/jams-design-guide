@@ -14,8 +14,9 @@ TDD 기반 구조적 디버깅 접근법을 사용합니다.
 **추측으로 수정 금지** — 원인을 먼저 확인하고 수정합니다.
 
 ## 참조 문서
-- 기술 스택: `.claude/agents/docs/tech-stack.md`
-- 코딩 컨벤션: `.claude/agents/docs/coding-conventions.md`
+- 기술 스택: `.claude/docs/tech-stack.md`
+- 코딩 컨벤션: `.claude/docs/coding-conventions.md`
+- 디자인 시스템: `.claude/docs/design-system.md`
 
 ## 디버깅 사이클 (Superpowers 방법론)
 
@@ -96,6 +97,171 @@ import { JobCard } from '@features/job/ui/JobCard';  // in features/apply/
 
 // ✅ widgets로 조합
 import { JobCard } from '@widgets/job-apply/ui/JobCard';
+```
+
+---
+
+## 비즈센터 자주 발생하는 버그 패턴
+
+### 1. 이름 마스킹 누락
+
+**증상**: 지원자 이름이 실명으로 노출됨  
+**원인**: `accepted` 상태 분기 없이 항상 `maskName()` 또는 항상 실명 노출  
+**수정**:
+```typescript
+// ❌
+<span>{applicant.name}</span>
+<span>{maskName(applicant.name)}</span>  // accepted도 마스킹하는 오류
+
+// ✅
+<span>{applicant.status === 'accepted' ? applicant.name : maskName(applicant.name)}</span>
+
+function maskName(name: string): string {
+  return name[0] + '**';
+}
+```
+
+### 2. 권한 미분기 — 권한 관리 섹션 오노출
+
+**증상**: 일반 멤버/간편 멤버에게 권한 관리 섹션이 보임  
+**원인**: `role === 'master'` 조건 누락  
+**수정**:
+```typescript
+// ❌
+<PermissionSection />
+
+// ✅
+{member.role === 'master' && <PermissionSection />}
+```
+
+### 3. ATS 4탭 모두 비어있을 때 섹션 미노출 누락
+
+**증상**: 지원자가 없어도 빈 탭 UI가 노출됨  
+**원인**: 전체 탭 count 합산 후 조건부 렌더 없음  
+**수정**:
+```typescript
+const totalApplicants =
+  applicants.unread.length +
+  applicants.interviewAdjust.length +
+  applicants.interviewDone.length +
+  applicants.unreviewed.length;
+
+// 모두 0건이면 섹션 자체 미노출
+{totalApplicants > 0 && <ApplicantSection applicants={applicants} />}
+```
+
+### 4. 비즈머니 케이스 분기 오류
+
+**증상**: 비즈머니 없을 때 숫자 0 또는 `-` 대신 undefined 표시  
+**원인**: 비즈머니 0원 vs 없음(null) 구분 안 됨  
+**수정**:
+```typescript
+// ❌
+{bizMoney > 0 ? `${bizMoney.toLocaleString()}P` : '-'}  // 0P도 '-'로 처리됨
+
+// ✅ — null/undefined이면 없음, 0이면 "0P"
+{bizMoney != null
+  ? `${bizMoney.toLocaleString()}P`
+  : <EmptyBizMoneyState />
+}
+```
+
+### 5. 캐러셀 배너 1개일 때 dots 노출
+
+**증상**: 배너 1개인데 페이지네이션 dots가 보임  
+**원인**: `showDots` prop에 배너 수 조건 누락  
+**수정**:
+```typescript
+// ❌
+<Carousel autoPlay showDots>
+
+// ✅
+<Carousel autoPlay={banners.length > 1} showDots={banners.length > 1}>
+```
+
+### 6. BizJAMS Tailwind 스케일 오용
+
+**증상**: 간격이나 radius가 의도와 다르게 렌더링됨  
+**원인**: 기본 Tailwind 스케일 혼동  
+
+```typescript
+// ❌ gap-4 = 4px인데 16px로 혼동
+className="gap-4"   // 이 프로젝트에서 4px (기본 Tailwind gap-4 = 16px)
+
+// ❌ rounded-full 사용
+className="rounded-full"  // BizJAMS에서 rounded-999 사용
+
+// ✅ 의미를 명확히 파악 후 사용
+className="gap-16"  // 16px
+className="rounded-999"  // pill 형태
+```
+
+### 7. 테이블 레이아웃 flex 사용
+
+**증상**: 테이블 컬럼 정렬이 헤더와 body 간에 맞지 않음  
+**원인**: `flex` 사용 — HC 테이블은 `gridTemplateColumns` 필수  
+
+```typescript
+// ❌
+<div className="flex">
+  <div className="flex-1">이름</div>
+  <div className="w-80">직군</div>
+</div>
+
+// ✅
+<div className="grid" style={{ gridTemplateColumns: '28px 72px 1fr 80px 100px 120px' }}>
+  <div>이름</div>
+  <div>직군</div>
+</div>
+```
+
+### 8. JDS 컴포넌트 미사용 (HTML 폼 요소 직접 사용)
+
+**증상**: ESLint 경고 또는 스타일 불일치  
+**원인**: `<button>`, `<input>`, `<select>` 직접 사용  
+
+```typescript
+// ❌
+<button onClick={handleClick}>제안하기</button>
+<input type="text" placeholder="검색" />
+
+// ✅
+import { Button, TextField } from '@jds/theme';
+<Button variant="primary" onClick={handleClick}>제안하기</Button>
+<TextField.Root><TextField.Input placeholder="검색" /></TextField.Root>
+```
+
+### 9. `use client` 누락으로 인한 서버 렌더링 에러
+
+**증상**: `useState is not a function` 또는 hydration 에러  
+**원인**: 인터랙션이 있는 컴포넌트에 `"use client"` 미선언  
+
+```typescript
+// ❌ 인터랙션 있는 컴포넌트에 누락
+import { useState } from 'react';
+export function FilterBar() {
+  const [active, setActive] = useState(false); // 에러
+```
+
+```typescript
+// ✅
+'use client';
+import { useState } from 'react';
+export function FilterBar() {
+  const [active, setActive] = useState(false);
+```
+
+### 10. 배럴 파일(index.ts) import로 인한 번들 최적화 실패
+
+**증상**: 빌드 경고 또는 불필요한 코드 번들 포함  
+**원인**: index.ts 통해 import  
+
+```typescript
+// ❌
+import { JobCard } from '@features/job';
+
+// ✅
+import { JobCard } from '@features/job/ui/JobCard';
 ```
 
 ## 금지
