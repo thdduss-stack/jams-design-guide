@@ -9,7 +9,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc -b tsconfig.json"
+    "typecheck": "tsc -b tsconfig.json",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-core": "^47.2.0",
@@ -141,6 +144,7 @@
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4",
+    "vitepress": "^1.6.4",
     "vitest": "^3.2.4",
     "yargs": "^17.7.2"
   },
