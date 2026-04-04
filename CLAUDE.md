@@ -18,6 +18,7 @@
 | 비즈센터 홈 스펙 | `.claude/agents/docs/bizcenter-home-spec.md` | 기능 정의서 (케이스별) |
 | 비즈센터 홈 디자인 | `.claude/agents/docs/bizcenter-home-design.md` | 컴포넌트 스펙 + Mock 데이터 |
 | 디자인 가이드 | `docs/policy/design-guide.md` | 사람(디자이너/개발자)용 가이드북 |
+| 레슨런 | `.claude/docs/lessons-learned.md` | 대화 중 발견한 규칙/실수/개선 누적 기록 |
 
 ---
 
