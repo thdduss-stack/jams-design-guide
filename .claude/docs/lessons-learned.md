@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-04-04 (2)
+
+### PRD 워크플로우
+
+- PRD 수신 → 코드 직행 금지 → Figma 디자인 먼저 생성 → 사용자에게 제안 → 승인 후 코드
+- **Why:** 코드 직행 시 비주얼 판단을 Claude가 임의로 내리게 되어 품질 저하
+- 흐름: `PRD → figma-generate-design → 제안 → 피드백 → figma-to-component → 코드`
+- Figma rate limit 상태면 "rate limit 풀리면 Figma 먼저" 라고 명시적으로 알림
+
+---
+
 ## 2026-04-04
 
 ### 문서 구조

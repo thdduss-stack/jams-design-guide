@@ -24,6 +24,11 @@
 
 ## 핵심 규칙 요약
 
+### PRD 수신 시 워크플로우 (필수)
+- PRD → 코드 직행 **금지**
+- 순서: PRD → **Figma 디자인 먼저 생성** → 사용자에게 제안 → 승인 → 코드 변환
+- Figma rate limit 상태면 명시적으로 알리고 대기
+
 ### Figma Dev Mode MCP
 - Figma MCP Server가 localhost 소스를 반환하면 해당 소스를 직접 사용
 - 새로운 아이콘 패키지 설치 금지 → `BZWIcon` / `@jds/theme Icon` 사용
